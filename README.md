@@ -33,7 +33,7 @@ See [`INSTALL.md`](INSTALL.md) for full setup and usage instructions.
 
 ## Architecture
 
-Open the repo and you'll find a complete Elixir/Phoenix application (125 files). Top-level layout: `config/`, `lib/`, `priv/`, `test/`. Run `./install.sh` once to install packages and populate demo data — the app is ready to use immediately after. Full setup details: [`INSTALL.md`](INSTALL.md).
+Open the repo and you'll find a complete Elixir/Phoenix application (112 files). Top-level layout: `config/`, `lib/`, `priv/`, `test/`. Run `./install.sh` once to install packages and populate demo data — the app is ready to use immediately after. Full setup details: [`INSTALL.md`](INSTALL.md).
 
 ## Features
 
