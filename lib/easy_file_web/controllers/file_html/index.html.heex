@@ -1,0 +1,73 @@
+<div class="files-page">
+  <div class="page-header">
+    <div class="page-header-content">
+      <h1 class="page-title">Your Files</h1>
+      <p class="page-subtitle">
+        <%= if @uploads == [] do %>
+          You haven't uploaded any files yet. Start by uploading your first file.
+        <% else %>
+          <%= length(@uploads) %> file<%= if length(@uploads) != 1, do: "s" %> uploaded
+        <% end %>
+      </p>
+    </div>
+    <a href="/files/new" class="btn btn-primary">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14"/>
+        <path d="M5 12h14"/>
+      </svg>
+      Upload File
+    </a>
+  </div>
+
+  <%= if @uploads == [] do %>
+    <div class="empty-state">
+      <div class="empty-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <path d="M12 18v-6"/>
+          <path d="M9 15l3-3 3 3"/>
+        </svg>
+      </div>
+      <h2 class="empty-title">No files uploaded yet</h2>
+      <p class="empty-description">Upload your first file to get started. We support PDFs, images, documents, and more.</p>
+      <a href="/files/new" class="btn btn-primary">Upload Your First File</a>
+    </div>
+  <% else %>
+    <div class="files-table-container">
+      <table class="files-table">
+        <thead>
+          <tr>
+            <th class="col-name">File Name</th>
+            <th class="col-type">Type</th>
+            <th class="col-size">Size</th>
+            <th class="col-date">Uploaded</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= for upload <- @uploads do %>
+            <tr class="file-row">
+              <td class="col-name">
+                <div class="file-name-cell">
+                  <span class="file-icon">
+                    <%= file_type_icon(assigns, upload) %>
+                  </span>
+                  <span class="file-name-text"><%= upload.filename %></span>
+                </div>
+              </td>
+              <td class="col-type">
+                <span class="type-badge"><%= upload.content_type %></span>
+              </td>
+              <td class="col-size">
+                <span class="size-value"><%= format_size(upload.size) %></span>
+              </td>
+              <td class="col-date">
+                <span class="date-value"><%= format_date(upload.inserted_at) %></span>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <title>EasyFile &mdash; Simple File Management</title>
+    <link rel="stylesheet" href="/assets/css/app.css" />
+    <script defer src="/assets/js/app.js">
+    </script>
+  </head>
+  <body class="body-bg">
+    <div class="app-shell">
+      <header class="app-nav">
+        <div class="nav-inner">
+          <a href={if @current_user, do: "/files", else: "/login"} class="nav-brand">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="brand-icon">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <span class="brand-text">EasyFile</span>
+          </a>
+
+          <%= if @current_user do %>
+            <div class="nav-actions">
+              <span class="nav-user"><%= @current_user.email %></span>
+              <a href="/logout" class="nav-link nav-logout">Sign out</a>
+            </div>
+          <% end %>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <%= if @flash["info"] do %>
+          <div class="flash flash-info" role="alert">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            <%= @flash["info"] %>
+          </div>
+        <% end %>
+        <%= if @flash["error"] do %>
+          <div class="flash flash-error" role="alert">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <%= @flash["error"] %>
+          </div>
+        <% end %>
+        <%= @inner_content %>
+      </main>
+    </div>
+  </body>
+</html>
